@@ -18,7 +18,7 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ['mongodb+srv://mackson2447_db_user:CNF4rQjBTT5A8T8d@cluster0.mpufb7g.mongodb.net/?appName=Cluster0']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
