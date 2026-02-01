@@ -1,0 +1,146 @@
+{
+  "identity": {
+    "persona": "E1: The Anti-AI Designer",
+    "mission": "Create a health assistant that feels like a caring companion, not a cold clinic. Fusion of 'Organic Wellness' and 'Swiss Medical Precision'.",
+    "principles": [
+      "Fusion: Medical Precision x Organic Warmth",
+      "Emotion: Trust through clarity, comfort through curves",
+      "Content: Data is the story. Visualize health, don't just list it.",
+      "Zoom In: Focus on the human element (faces, hands, organic shapes).",
+      "Negative Space: Health needs room to breathe. 3x spacing."
+    ]
+  },
+  "typography": {
+    "headings": {
+      "family": "Manrope, sans-serif",
+      "weights": ["600", "800"],
+      "usage": "Use for all section headers, hero titles, and feature names. Friendly but geometric.",
+      "letterSpacing": "tracking-tight"
+    },
+    "body": {
+      "family": "Public Sans, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Use for all paragraphs, UI labels, and data tables. Highly legible.",
+      "letterSpacing": "tracking-normal"
+    },
+    "installation": "Import via Google Fonts in index.css: @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Public+Sans:wght@400;500;600&display=swap');"
+  },
+  "colors": {
+    "palette_name": "Organic Precision",
+    "description": "A blend of clinical trust (Teal) and human warmth (Bone/Terracotta).",
+    "primary": {
+      "DEFAULT": "#0F766E",
+      "foreground": "#FFFFFF",
+      "hover": "#115E59",
+      "description": "Deep Teal. Use for primary buttons, active states, and key brand elements. Trustworthy but modern."
+    },
+    "secondary": {
+      "DEFAULT": "#F2F0E9",
+      "foreground": "#1C1917",
+      "description": "Bone/Alabaster. Use for page backgrounds, cards, and soft containers. Avoid pure white #FFFFFF for backgrounds."
+    },
+    "accent": {
+      "DEFAULT": "#D97757",
+      "foreground": "#FFFFFF",
+      "description": "Terracotta. Use sparingly for 'Call to Action', alerts, or heart-rate visualizations."
+    },
+    "background": "#FDFCF8",
+    "surface": "#FFFFFF",
+    "text": {
+      "primary": "#111827",
+      "secondary": "#4B5563",
+      "muted": "#9CA3AF"
+    },
+    "status": {
+      "success": "#059669",
+      "warning": "#D97706",
+      "error": "#DC2626",
+      "info": "#0284C7"
+    }
+  },
+  "visual_enhancers": {
+    "radius": "rounded-xl (0.75rem) or rounded-2xl (1rem) for cards. rounded-full for buttons.",
+    "shadows": {
+      "card": "0 4px 20px -2px rgba(15, 118, 110, 0.08)",
+      "hover": "0 10px 25px -5px rgba(15, 118, 110, 0.15)",
+      "inner": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)"
+    },
+    "glassmorphism": {
+      "usage": "Use for sticky headers and floating overlays.",
+      "classes": "bg-white/80 backdrop-blur-md border border-white/20 shadow-sm"
+    },
+    "gradients": {
+      "hero": "bg-gradient-to-br from-[#F2F0E9] via-[#E0F2F1] to-[#FDFCF8]",
+      "card_hover": "bg-gradient-to-br from-white to-[#F0FDFA]"
+    }
+  },
+  "layout": {
+    "spacing_scale": "Generous. Use p-6, p-8, p-12. Avoid cramped p-2 or p-4 for main containers.",
+    "grid_system": {
+      "dashboard": "Bento Grid. Mix of 1x1, 2x1, and 2x2 tiles. Use 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6'.",
+      "landing": "Asymmetric 'Tetris' Grid. Large hero visuals (col-span-2) paired with stacked text blocks (col-span-1)."
+    },
+    "containers": {
+      "max_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "card_style": "bg-white rounded-2xl border border-stone-100 shadow-card hover:shadow-hover transition-all duration-300"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-6 font-semibold shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-full px-8 py-6 font-medium"
+    },
+    "cards": {
+      "dashboard": "bg-white rounded-2xl p-6 border border-stone-100 shadow-sm hover:border-primary/20 transition-colors",
+      "feature": "bg-[#F2F0E9]/50 rounded-3xl p-8 border-none"
+    },
+    "inputs": {
+      "style": "bg-white border-stone-200 focus:border-primary focus:ring-primary/20 rounded-xl h-12"
+    }
+  },
+  "images": {
+    "hero": {
+      "url": "https://images.unsplash.com/photo-1659353888096-cc5e333db5e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBwYXRpZW50JTIwY29uc3VsdGF0aW9uJTIwZnJpZW5kbHl8ZW58MHx8fHwxNzY5OTMxODE0fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Friendly doctor consultation",
+      "usage": "Hero section main visual"
+    },
+    "lifestyle": {
+      "url": "https://images.unsplash.com/photo-1723406230636-aa8c4ac1e6c5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwbGlmZXN0eWxlJTIweW9nYSUyMG1vcm5pbmd8ZW58MHx8fHwxNzY5OTMxODIwfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Morning yoga healthy lifestyle",
+      "usage": "Wellness tracking section"
+    },
+    "abstract_tech": {
+      "url": "https://images.unsplash.com/photo-1761767380566-7a86c3e653a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwdGVjaG5vbG9neSUyMGFic3RyYWN0JTIwbWluaW1hbGlzdHxlbnwwfHx8fDE3Njk5MzE4MjR8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract medical technology",
+      "usage": "AI features background or card accent"
+    },
+    "doctor_tablet": {
+      "url": "https://images.unsplash.com/photo-1659353888477-6e6aab941b55?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwzfHxkb2N0b3IlMjBwYXRpZW50JTIwY29uc3VsdGF0aW9uJTIwZnJpZW5kbHl8ZW58MHx8fHwxNzY5OTMxODE0fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Doctor using tablet",
+      "usage": "Telemedicine feature"
+    }
+  },
+  "tech_stack": {
+    "framework": "React (JS/JSX)",
+    "styling": "Tailwind CSS",
+    "components": "Shadcn UI",
+    "icons": "Lucide React",
+    "charts": "Recharts (via Shadcn Charts)"
+  },
+  "instructions_to_main_agent": [
+    "CRITICAL: The project uses .js/.jsx files. DO NOT use TypeScript syntax (interfaces, types) in the code.",
+    "THEME: Implement the 'Organic Precision' palette. Override default Shadcn colors in tailwind.config.js.",
+    "FONTS: Add Manrope and Public Sans to index.css immediately.",
+    "COMPONENTS: Customize Shadcn components to match the 'rounded-xl' and 'soft shadow' aesthetic. Avoid default sharp edges.",
+    "LAYOUT: Use the 'Bento Grid' for the dashboard. Ensure widgets stretch to fill height.",
+    "AI CHAT: Design the chat interface to feel like a conversation with a friend, not a terminal. Use bubbles with soft colors (Primary/10 for bot, Primary for user).",
+    "IMAGES: Use the provided Unsplash URLs. Do not use placeholders.",
+    "TESTING: Add data-testid to all interactive elements."
+  ],
+  "universal_guidelines": [
+    "Avoid 'AI Slop': No generic gradients, no centered text blocks without purpose.",
+    "Micro-interactions: Add hover states to everything. Buttons should lift, cards should glow subtly.",
+    "Accessibility: Ensure text contrast is high (Teal on Bone is good, but check small text).",
+    "Glassmorphism: Use sparingly for the header and floating action buttons."
+  ]
+}
