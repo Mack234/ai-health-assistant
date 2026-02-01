@@ -12,15 +12,18 @@ import uuid
 from datetime import datetime, timezone, timedelta
 import bcrypt
 import jwt
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+from openai import AsyncOpenAI
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['mongodb+srv://mackson2447_db_user:CNF4rQjBTT5A8T8d@cluster0.mpufb7g.mongodb.net/?appName=Cluster0']
+mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+# OpenAI client
+openai_client = AsyncOpenAI(api_key=os.environ['EMERGENT_LLM_KEY'])
 
 # JWT Configuration
 JWT_SECRET = os.environ['JWT_SECRET']
@@ -140,6 +143,17 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
+# Helper: call OpenAI
+async def call_openai(system_message: str, user_message: str) -> str:
+    response = await openai_client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": user_message},
+        ]
+    )
+    return response.choices[0].message.content
+
 # Auth Routes
 @api_router.post("/auth/register", response_model=TokenResponse)
 async def register(user_data: UserRegister):
@@ -175,17 +189,11 @@ async def send_chat_message(data: ChatMessageCreate, user_id: str = Depends(get_
     session_id = data.session_id or str(uuid.uuid4())
     
     try:
-        # Initialize AI Chat
-        chat = LlmChat(
-            api_key=os.environ['EMERGENT_LLM_KEY'],
-            session_id=session_id,
-            system_message="You are a helpful AI health assistant. Provide informative, supportive health advice. Always remind users to consult healthcare professionals for serious concerns. Keep responses conversational and empathetic."
-        ).with_model("openai", "gpt-5.2")
+        ai_response = await call_openai(
+            system_message="You are a helpful AI health assistant. Provide informative, supportive health advice. Always remind users to consult healthcare professionals for serious concerns. Keep responses conversational and empathetic.",
+            user_message=data.message
+        )
         
-        user_message = UserMessage(text=data.message)
-        ai_response = await chat.send_message(user_message)
-        
-        # Save to database
         chat_msg = ChatMessageResponse(
             user_id=user_id,
             session_id=session_id,
@@ -219,7 +227,6 @@ async def get_chat_history(session_id: Optional[str] = None, user_id: str = Depe
 @api_router.post("/symptoms/analyze", response_model=SymptomCheckResponse)
 async def analyze_symptoms(data: SymptomCheckRequest, user_id: str = Depends(get_current_user)):
     try:
-        # Create a focused prompt for symptom analysis
         prompt_text = f"Analyze these symptoms: {data.symptoms}"
         if data.duration:
             prompt_text += f" Duration: {data.duration}"
@@ -227,13 +234,10 @@ async def analyze_symptoms(data: SymptomCheckRequest, user_id: str = Depends(get
             prompt_text += f" Severity: {data.severity}"
         prompt_text += "\n\nProvide: 1) Possible conditions 2) When to seek medical care 3) Self-care tips. Keep it concise and clear."
         
-        chat = LlmChat(
-            api_key=os.environ['EMERGENT_LLM_KEY'],
-            session_id=str(uuid.uuid4()),
-            system_message="You are a medical symptom analyzer. Provide helpful analysis but always emphasize consulting healthcare professionals."
-        ).with_model("openai", "gpt-5.2")
-        
-        analysis = await chat.send_message(UserMessage(text=prompt_text))
+        analysis = await call_openai(
+            system_message="You are a medical symptom analyzer. Provide helpful analysis but always emphasize consulting healthcare professionals.",
+            user_message=prompt_text
+        )
         
         symptom_report = SymptomCheckResponse(
             user_id=user_id,
